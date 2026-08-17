@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Text Diff Online - QuickTools</title>
+  <meta name="description" content="Bandingkan dua teks dan lihat perbedaannya secara highlighted.">
+  <meta name="keywords" content="text diff online, compare text, bandingkan teks, text comparison tool">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/text-diff.html">
+  <meta property="og:title" content="Text Diff Online - QuickTools">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>🔍 Text Diff</h1>
+    <p class="subtitle">Bandingkan dua teks dan temukan perbedaannya.</p>
+
+    <div class="tool-section">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="form-group">
+          <label for="text1">Teks Asli:</label>
+          <textarea id="text1" placeholder="Teks versi pertama..." style="min-height:150px"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="text2">Teks Baru:</label>
+          <textarea id="text2" placeholder="Teks versi kedua..." style="min-height:150px"></textarea>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="compareDiff()">🔍 Bandingkan</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('text1').value='';document.getElementById('text2').value='';document.getElementById('output').innerHTML=''">🗑️ Hapus</button>
+      </div>
+    </div>
+
+    <div class="tool-section">
+      <div class="output-label">Hasil Perbandingan</div>
+      <div class="output-box" id="output" style="min-height:100px"><span style="color:var(--text-muted)">Klik Bandingkan untuk melihat hasil...</span></div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function simpleDiff(a,b){
+      const linesA=a.split('\n'),linesB=b.split('\n');
+      const maxLen=Math.max(linesA.length,linesB.length);
+      let result='';
+      for(let i=0;i<maxLen;i++){
+        const lineA=linesA[i]!==undefined?linesA[i]:null;
+        const lineB=linesB[i]!==undefined?linesB[i]:null;
+        if(lineA===lineB){
+          result+=`<div style="padding:.2rem .5rem;color:var(--text-muted)">${esc(lineA||'')}</div>`;
+        }else{
+          if(lineA!==null)result+=`<div style="padding:.2rem .5rem;background:rgba(239,68,68,.15);color:#ef4444;text-decoration:line-through">- ${esc(lineA)}</div>`;
+          if(lineB!==null)result+=`<div style="padding:.2rem .5rem;background:rgba(34,197,94,.15);color:#22c55e">+ ${esc(lineB)}</div>`;
+        }
+      }
+      return result||'<div style="color:var(--text-muted)">Teks identik!</div>';
+    }
+    function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+    function compareDiff(){
+      const a=document.getElementById('text1').value;
+      const b=document.getElementById('text2').value;
+      document.getElementById('output').innerHTML=simpleDiff(a,b);
+    }
+  </script>
+</body>
+</html>

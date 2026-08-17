@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Base64 Encoder/Decoder Online - QuickTools</title>
+  <meta name="description" content="Encode dan decode Base64 secara instan. Gratis, cepat, dan aman.">
+  <meta name="keywords" content="base64 encoder online, base64 decoder, encode base64, decode base64">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/base64.html">
+  <meta property="og:title" content="Base64 Encoder/Decoder Online - QuickTools">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>🔐 Base64 Encoder/Decoder</h1>
+    <p class="subtitle">Encode dan decode teks ke/Base64 secara instan di browser kamu.</p>
+
+    <div class="tool-section">
+      <div class="form-group">
+        <label for="input">Input:</label>
+        <textarea id="input" placeholder="Masukkan teks untuk di-encode atau Base64 untuk di-decode..."></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm" onclick="b64('encode')">⬆️ Encode</button>
+        <button class="btn btn-primary btn-sm" onclick="b64('decode')">⬇️ Decode</button>
+        <button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('output').textContent,this)">📋 Salin</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('input').value='';document.getElementById('output').textContent=''">🗑️ Hapus</button>
+      </div>
+      <div id="error" style="color:var(--danger);margin-top:.8rem;font-size:.9rem;display:none"></div>
+    </div>
+
+    <div class="tool-section">
+      <div class="output-label">Hasil</div>
+      <div class="output-box" id="output"><span style="color:var(--text-muted)">Hasil akan muncul di sini...</span></div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function b64(mode){
+      const e=document.getElementById('error');
+      const input=document.getElementById('input').value;
+      e.style.display='none';
+      try{
+        if(mode==='encode'){
+          document.getElementById('output').textContent=btoa(unescape(encodeURIComponent(input)));
+        }else{
+          document.getElementById('output').textContent=decodeURIComponent(escape(atob(input.trim())));
+        }
+      }catch(err){
+        e.textContent='❌ Error: '+err.message+' (pastikan input valid)';
+        e.style.display='block';
+      }
+    }
+  </script>
+</body>
+</html>

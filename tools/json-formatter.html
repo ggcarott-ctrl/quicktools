@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JSON Formatter Online - QuickTools</title>
+  <meta name="description" content="Format, validasi, dan minify JSON secara instan. Gratis dan cepat.">
+  <meta name="keywords" content="JSON formatter online, format JSON, minify JSON, validasi JSON, JSON validator">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/json-formatter.html">
+  <meta property="og:title" content="JSON Formatter Online - QuickTools">
+  <meta property="og:description" content="Format, validasi, dan minify JSON secara instan.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>{ } JSON Formatter</h1>
+    <p class="subtitle">Format, validasi, dan minify JSON dengan mudah.</p>
+
+    <div class="tool-section">
+      <div class="form-group">
+        <label for="input">Masukkan JSON:</label>
+        <textarea id="input" placeholder='{"nama":"QuickTools","versi":1}' style="min-height:200px"></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm" onclick="fmt(2)">🎨 Format</button>
+        <button class="btn btn-primary btn-sm" onclick="fmt(0)">📦 Minify</button>
+        <button class="btn btn-outline btn-sm" onclick="copyText(document.getElementById('output').textContent,this)">📋 Salin</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('input').value='';document.getElementById('output').textContent=''">🗑️ Hapus</button>
+      </div>
+      <div id="error" style="color:var(--danger);margin-top:.8rem;font-size:.9rem;display:none"></div>
+    </div>
+
+    <div class="tool-section">
+      <div class="output-label">Hasil</div>
+      <div class="output-box" id="output" style="min-height:100px"><span style="color:var(--text-muted)">Hasil akan muncul di sini...</span></div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function fmt(indent){
+      const e=document.getElementById('error');
+      e.style.display='none';
+      try{
+        const obj=JSON.parse(document.getElementById('input').value);
+        document.getElementById('output').textContent=indent?JSON.stringify(obj,null,indent):JSON.stringify(obj);
+      }catch(err){
+        e.textContent='❌ Error: '+err.message;
+        e.style.display='block';
+      }
+    }
+  </script>
+</body>
+</html>

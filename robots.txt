@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /js/data.js
+
+Sitemap: https://quicktools.id/sitemap.xml

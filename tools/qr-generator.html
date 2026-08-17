@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QR Code Generator Online Gratis - QuickTools</title>
+  <meta name="description" content="Buat QR code dari teks atau URL secara gratis. Download sebagai PNG.">
+  <meta name="keywords" content="qr code generator online, buat qr code, generate qr code gratis, qr code maker">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/qr-generator.html">
+  <meta property="og:title" content="QR Code Generator Online Gratis - QuickTools">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>📱 QR Code Generator</h1>
+    <p class="subtitle">Buat QR code dari teks atau URL. Download sebagai PNG.</p>
+
+    <div class="tool-section">
+      <div class="form-group">
+        <label for="input">Teks atau URL:</label>
+        <input type="text" id="input" placeholder="https://example.com atau teks apa saja" oninput="genQR()">
+      </div>
+      <div class="form-group">
+        <label>Ukuran: <strong id="sizeVal">256</strong>px</label>
+        <input type="range" id="qrSize" min="128" max="512" value="256" step="64" oninput="document.getElementById('sizeVal').textContent=this.value;genQR()" style="width:100%;accent-color:var(--primary)">
+      </div>
+      <div id="qrOutput" style="text-align:center;padding:2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:1rem">
+        <span style="color:var(--text-muted)">Ketik teks atau URL untuk membuat QR code...</span>
+      </div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn btn-primary" onclick="downloadQR()">⬇️ Download PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script>
+    function genQR(){
+      const text=document.getElementById('input').value.trim();
+      const size=+document.getElementById('qrSize').value;
+      const out=document.getElementById('qrOutput');
+      if(!text){out.innerHTML='<span style="color:var(--text-muted)">Ketik teks atau URL untuk membuat QR code...</span>';return;}
+      try{
+        const canvas=document.createElement('canvas');
+        canvas.width=size;canvas.height=size;
+        QRCode.toCanvas(canvas,text,{width:size,margin:2,color:{dark:'#0f172a',light:'#ffffff'}},err=>{
+          if(err){out.innerHTML='<span style="color:var(--danger)">Error: '+err.message+'</span>';return;}
+          out.innerHTML='';
+          out.appendChild(canvas);
+        });
+      }catch(e){
+        out.innerHTML='<span style="color:var(--danger)">Gagal generate QR code</span>';
+      }
+    }
+    function downloadQR(){
+      const canvas=document.querySelector('#qrOutput canvas');
+      if(!canvas)return;
+      const link=document.createElement('a');
+      link.download='qrcode-quicktools.png';
+      link.href=canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>

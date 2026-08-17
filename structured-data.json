@@ -1,0 +1,12 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "QuickTools",
+  "url": "https://quicktools.id",
+  "description": "Kumpulan tools online gratis: word counter, JSON formatter, password generator, dan banyak lagi.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://quicktools.id/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}

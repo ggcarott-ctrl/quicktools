@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Markdown Preview Online - QuickTools</title>
+  <meta name="description" content="Preview Markdown secara real-time. Gratis dan cepat.">
+  <meta name="keywords" content="markdown preview online, markdown editor, live markdown preview">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/markdown-preview.html">
+  <meta property="og:title" content="Markdown Preview Online - QuickTools">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>📖 Markdown Preview</h1>
+    <p class="subtitle">Tulis Markdown di kiri, lihat hasilnya di kanan secara real-time.</p>
+
+    <div class="tool-section">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="form-group">
+          <label>Markdown:</label>
+          <textarea id="input" placeholder="# Heading&#10;&#10;**Bold** dan *italic*&#10;&#10;- List item 1&#10;- List item 2&#10;&#10;`inline code`" style="min-height:300px" oninput="renderMd()"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preview:</label>
+          <div id="preview" style="min-height:300px;padding:1rem;border:2px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);overflow-y:auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+    function renderMd(){
+      let t=document.getElementById('input').value;
+      let h=esc(t);
+      h=h.replace(/~~~(\w*)\n([\s\S]*?)~~~/g,(_,l,c)=>`<pre style="background:var(--surface-alt);padding:1rem;border-radius:8px;overflow-x:auto"><code>${c.trim()}</code></pre>`);
+      h=h.replace(/`([^`]+)`/g,'<code style="background:var(--surface-alt);padding:.1rem .4rem;border-radius:4px;font-family:var(--mono);font-size:.9em">$1</code>');
+      h=h.replace(/^### (.+)$/gm,'<h3 style="margin:1rem 0 .5rem">$1</h3>');
+      h=h.replace(/^## (.+)$/gm,'<h2 style="margin:1.5rem 0 .5rem;border-bottom:2px solid var(--border);padding-bottom:.3rem">$1</h2>');
+      h=h.replace(/^# (.+)$/gm,'<h1 style="margin:1rem 0 .5rem">$1</h1>');
+      h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+      h=h.replace(/\*(.+?)\*/g,'<em>$1</em>');
+      h=h.replace(/^- (.+)$/gm,'<li style="margin-left:1.5rem;margin-bottom:.3rem">$1</li>');
+      h=h.replace(/^\d+\. (.+)$/gm,'<li style="margin-left:1.5rem;margin-bottom:.3rem;list-style-type:decimal">$1</li>');
+      h=h.replace(/\n\n/g,'<br><br>');
+      document.getElementById('preview').innerHTML=h;
+    }
+  </script>
+</body>
+</html>

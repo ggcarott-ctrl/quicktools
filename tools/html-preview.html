@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HTML Preview Online - QuickTools</title>
+  <meta name="description" content="Preview kode HTML secara real-time. Gratis dan cepat.">
+  <meta name="keywords" content="html preview online, live html preview, html editor online, preview html code">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/html-preview.html">
+  <meta property="og:title" content="HTML Preview Online - QuickTools">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>🌐 HTML Preview</h1>
+    <p class="subtitle">Tulis kode HTML di kiri, lihat hasilnya di kanan secara real-time.</p>
+
+    <div class="tool-section">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="form-group">
+          <label>Kode HTML:</label>
+          <textarea id="input" placeholder="<h1>Halo Dunia</h1>&#10;<p style='color:blue'>Ini contoh HTML</p>" style="min-height:300px;font-family:var(--mono);font-size:.9rem" oninput="previewHtml()"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Preview:</label>
+          <iframe id="preview" style="width:100%;min-height:300px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function previewHtml(){
+      const html=document.getElementById('input').value;
+      const iframe=document.getElementById('preview');
+      const doc=iframe.contentDocument||iframe.contentWindow.document;
+      doc.open();
+      doc.write(html);
+      doc.close();
+    }
+  </script>
+</body>
+</html>

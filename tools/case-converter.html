@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Case Converter Online - QuickTools</title>
+  <meta name="description" content="Ubah teks ke UPPERCASE, lowercase, Title Case, sentence case, atau snake_case secara instan.">
+  <meta name="keywords" content="case converter online, uppercase lowercase, ubah huruf besar kecil, title case converter">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://quicktools.id/tools/case-converter.html">
+  <meta property="og:title" content="Case Converter Online - QuickTools">
+  <meta property="og:description" content="Ubah teks ke UPPERCASE, lowercase, Title Case, sentence case, atau snake_case.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script>initTheme();</script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="../" class="nav-brand">QuickTools <span>FREE</span></a>
+      <div class="nav-links">
+        <a href="../">Tools</a>
+        <a href="../about.html">About</a>
+        <a href="../contact.html">Kontak</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+      <button class="nav-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <div class="tool-page">
+    <h1>🔤 Case Converter</h1>
+    <p class="subtitle">Ubah teks ke berbagai format huruf dengan satu klik.</p>
+
+    <div class="tool-section">
+      <div class="form-group">
+        <label for="input">Masukkan teks:</label>
+        <textarea id="input" placeholder="Ketik atau paste teks di sini..."></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm" onclick="convert('upper')">UPPERCASE</button>
+        <button class="btn btn-primary btn-sm" onclick="convert('lower')">lowercase</button>
+        <button class="btn btn-primary btn-sm" onclick="convert('title')">Title Case</button>
+        <button class="btn btn-primary btn-sm" onclick="convert('sentence')">Sentence case</button>
+        <button class="btn btn-primary btn-sm" onclick="convert('snake')">snake_case</button>
+        <button class="btn btn-primary btn-sm" onclick="convert('kebab')">kebab-case</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('input').value='';document.getElementById('output').textContent=''">🗑️ Hapus</button>
+      </div>
+    </div>
+
+    <div class="tool-section">
+      <div class="output-label">Hasil</div>
+      <div class="output-box" id="output" style="min-height:60px;cursor:pointer" onclick="copyText(this.textContent,this)">
+        <span style="color:var(--text-muted)">Klik tombol di atas untuk mengubah teks...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Iklan</div>
+
+  <footer class="footer"><div class="footer-bottom">&copy; 2026 QuickTools. Semua tools gratis.</div></footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function convert(type){
+      const t=document.getElementById('input').value;
+      if(!t)return;
+      let r='';
+      switch(type){
+        case 'upper':r=t.toUpperCase();break;
+        case 'lower':r=t.toLowerCase();break;
+        case 'title':r=t.replace(/\w\S*/g,w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase());break;
+        case 'sentence':r=t.toLowerCase().replace(/(^\s*|[.!?]\s+)(\w)/g,(m,p1,p2)=>p1+p2.toUpperCase());break;
+        case 'snake':r=t.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');break;
+        case 'kebab':r=t.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');break;
+      }
+      document.getElementById('output').textContent=r;
+    }
+  </script>
+</body>
+</html>
