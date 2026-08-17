@@ -2,11 +2,11 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "QuickTools",
-  "url": "https://flare.duckdns.org",
+  "url": "https://quicktools.duckdns.org",
   "description": "Kumpulan tools online gratis: word counter, JSON formatter, password generator, dan banyak lagi.",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://flare.duckdns.org/?q={search_term_string}",
+    "target": "https://quicktools.duckdns.org/?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
